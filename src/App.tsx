@@ -19,16 +19,16 @@ function App() {
 	return (
 		<div className='App'>
 			<h1>Generation Effect App</h1>
-			<div>
+			<div className='input'>
 				<label>Input a Sentence or Paragraph:</label>
 				<textarea
-					rows={4}
-					cols={50}
+					rows={12}
+					cols={80}
 					value={inputText}
 					onChange={handleInputChange}
 				/>
 			</div>
-			<div>
+			<div className='difficulty'>
 				<label>Difficulty Level:</label>
 				<select onChange={(e) => setDifficulty(e.target.value)}>
 					<option value='easy'>Easy</option>
@@ -36,11 +36,15 @@ function App() {
 					<option value='hard'>Hard</option>
 				</select>
 			</div>
-			<button onClick={generate}>Generate</button>
-			<div>
-				<label>Output Text:</label>
-				<div>{outputText}</div>
-			</div>
+			<button className='button-generate' onClick={generate}>
+				Generate
+			</button>
+			{outputText && (
+				<div className='output'>
+					<label>Output Text:</label>
+					<div>{outputText}</div>
+				</div>
+			)}
 		</div>
 	);
 }
