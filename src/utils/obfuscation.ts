@@ -27,27 +27,35 @@ class HardObfuscationStrategy implements ObfuscationStrategy {
 	}
 }
 
-// Create a function that generates obfuscated output
 export function generateOutput(inputText: string, difficulty: string): string {
 	const words = inputText.split(' ');
 	let output = '';
-	let changeWords = false;
 
 	const obfuscationStrategy = getObfuscationStrategy(difficulty);
 
-	words.forEach((word) => {
-		if (changeWords) {
-			const obscuredWord = obfuscationStrategy.obfuscate(word);
-			output += obscuredWord + ' ';
-			changeWords = false;
-		} else {
-			output += word + ' ';
+	const isArticle = (word: string) =>
+		['a', 'an', 'the'].includes(word.toLowerCase());
+	const isVerb = (word: string) =>
+		['is', 'are', 'am', 'was', 'were'].includes(word.toLowerCase());
+
+	for (let i = 0; i < words.length; i++) {
+		const currentWord = words[i];
+		const nextWord = words[i + 1];
+
+		if (isVerb(currentWord) && !isArticle(nextWord)) {
+			const obscuredWord = obfuscationStrategy.obfuscate(nextWord);
+			output += currentWord + ' ' + obscuredWord + ' ';
 		}
 
-		if (['is', 'are', 'am', 'was', 'were'].includes(word.toLowerCase())) {
-			changeWords = true;
+		if (isVerb(currentWord) && isArticle(nextWord) && words[i + 2]) {
+			const obscuredWord = obfuscationStrategy.obfuscate(words?.[i + 2]);
+			output += currentWord + ' ' + nextWord + ' ' + obscuredWord + ' ';
 		}
-	});
+
+		if (isVerb(currentWord) && isArticle(nextWord) && !words[i + 2]) {
+			output += currentWord + ' ' + nextWord + ' ';
+		}
+	}
 
 	return output.trim();
 }
