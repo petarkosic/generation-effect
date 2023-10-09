@@ -42,18 +42,20 @@ export function generateOutput(inputText: string, difficulty: string): string {
 		const currentWord = words[i];
 		const nextWord = words[i + 1];
 
+		if (currentWord !== output.trim().split(' ').at(-1)) {
+			output += currentWord + ' ';
+		}
+
 		if (isVerb(currentWord) && !isArticle(nextWord)) {
 			const obscuredWord = obfuscationStrategy.obfuscate(nextWord);
-			output += currentWord + ' ' + obscuredWord + ' ';
-		}
-
-		if (isVerb(currentWord) && isArticle(nextWord) && words[i + 2]) {
-			const obscuredWord = obfuscationStrategy.obfuscate(words?.[i + 2]);
-			output += currentWord + ' ' + nextWord + ' ' + obscuredWord + ' ';
-		}
-
-		if (isVerb(currentWord) && isArticle(nextWord) && !words[i + 2]) {
-			output += currentWord + ' ' + nextWord + ' ';
+			output += obscuredWord + ' ';
+			// Skip adding the original word to the output
+			i++;
+		} else if (isArticle(currentWord)) {
+			const obscuredWord = obfuscationStrategy.obfuscate(nextWord);
+			output += obscuredWord + ' ';
+			// Skip adding the original word to the output
+			i++;
 		}
 	}
 
