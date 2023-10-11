@@ -1,27 +1,45 @@
-# React + TypeScript + Vite
+![Home Page](./src/assets/homepage.png 'Home Page')
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Generation Effect
 
-Currently, two official plugins are available:
+The "generation effect" refers to a psychological phenomenon where actively creating or generating information, as opposed to passively consuming it, enhances learning and retention. It's a cognitive principle that highlights the idea that when individuals engage in the process of generating information, they are more likely to remember and understand it better.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### How it works:
 
-## Expanding the ESLint configuration
+- **Active Engagement**:
+  Instead of simply reading or listening to information, the generation effect encourages individuals to actively engage with the material. This can involve tasks such as summarizing, explaining, or teaching the content to someone else.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+  <br/>
 
-- Configure the top-level `parserOptions` property like this:
+- **Mental Processing**:
+  When you actively generate information, your brain is forced to process and organize the material in a meaningful way. This deepens your understanding and memory of the subject matter.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+  <br/>
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- **Retrieval Practice**:
+  Actively generating information requires you to retrieve it from your memory, reinforcing the neural pathways associated with that knowledge. This retrieval practice makes the information easier to recall in the future.
+
+  <br/>
+
+- **Enhanced Learning**:
+  Studies have shown that actively generating information leads to improved learning outcomes compared to passive learning methods. It can boost memory retention, comprehension, and problem-solving abilities.
+
+  <br/>
+
+### Rules:
+
+**Input**:
+
+- Enter a sentence or paragraph.
+
+**Choose Difficulty**:
+
+- Select easy, medium, or hard mode.
+
+**Generate**:
+
+- Create a modified version of the text based on the chosen difficulty.
+
+**Practice**:
+
+- Try to decipher and understand the modified text.
