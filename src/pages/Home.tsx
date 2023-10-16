@@ -5,7 +5,7 @@ import Header from '../components/Header';
 
 function Home() {
 	const [inputText, setInputText] = useState('');
-	const [outputText, setOutputText] = useState('');
+	const [outputText, setOutputText] = useState<(string | JSX.Element)[]>();
 	const [difficulty, setDifficulty] = useState('easy');
 	const [error, setError] = useState('');
 
@@ -19,7 +19,7 @@ function Home() {
 
 			setTimeout(() => {
 				setError('');
-				setOutputText('');
+				setOutputText([]);
 			}, 3000);
 		}
 		const generatedOutput = generateOutput(inputText, difficulty);
@@ -62,7 +62,13 @@ function Home() {
 				{outputText && !error && (
 					<div className='output'>
 						<label>Output Text:</label>
-						<div>{outputText}</div>
+						<div>
+							{outputText.map((element, index) => (
+								<span key={index} className='word'>
+									{element}
+								</span>
+							))}
+						</div>
 					</div>
 				)}
 			</div>
