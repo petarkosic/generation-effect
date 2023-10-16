@@ -4,6 +4,13 @@
 
 The "generation effect" refers to a psychological phenomenon where actively creating or generating information, as opposed to passively consuming it, enhances learning and retention. It's a cognitive principle that highlights the idea that when individuals engage in the process of generating information, they are more likely to remember and understand it better.
 
+## Table of Contents
+
+1. [How it works](#how-it-works)
+2. [Rules](#rules)
+3. [Requirements](#requirements)
+4. [How to run](#how-to-run)
+
 ### How it works:
 
 - **Active Engagement**:
@@ -43,3 +50,32 @@ The "generation effect" refers to a psychological phenomenon where actively crea
 **Practice**:
 
 - Try to decipher and understand the modified text.
+
+<br />
+
+### Requirements
+
+- Node js 16.+ (https://nodejs.org)
+
+<br />
+
+### How to run
+
+Clone the project and navigate to it:
+
+```
+git clone https://github.com/petarkosic/generation-effect.git
+cd /generation-effect
+```
+
+Install the dependencies:
+
+```
+npm install
+```
+
+Run the app in development mode:
+
+```
+npm run dev
+```
