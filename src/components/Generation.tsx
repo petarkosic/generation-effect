@@ -2,9 +2,15 @@ import { useState } from 'react';
 import '../App.css';
 import { generateOutput } from '../utils/obfuscation';
 
+type TOutputText = {
+	original: string;
+	obfuscated: string;
+	isCorrect: boolean;
+};
+
 function Generation() {
 	const [inputText, setInputText] = useState('');
-	const [outputText, setOutputText] = useState<(string | JSX.Element)[]>();
+	const [outputText, setOutputText] = useState<TOutputText[]>();
 	const [difficulty, setDifficulty] = useState('easy');
 	const [error, setError] = useState('');
 
@@ -21,15 +27,52 @@ function Generation() {
 				setOutputText([]);
 			}, 3000);
 		}
+
+		const originalInputText = inputText.split(' ');
 		const generatedOutput = generateOutput(inputText, difficulty);
-		const words = generatedOutput.split(' ').map((word) => {
+
+		const words = generatedOutput.split(' ').map((word, idx) => {
 			if (word.includes('_')) {
-				return <span className='obfuscated'>{word} </span>;
+				return {
+					original: originalInputText[idx],
+					obfuscated: word,
+					isCorrect: false,
+				};
 			}
-			return word + ' ';
+
+			return {
+				original: originalInputText[idx],
+				obfuscated: word + ' ',
+				isCorrect: true,
+			};
 		});
 
 		setOutputText(words);
+	};
+
+	const handleKeyUp = (
+		event: React.KeyboardEvent<HTMLInputElement>,
+		index: number
+	) => {
+		const inputValue = event.currentTarget.value;
+		const isCorrect = inputValue === outputText?.[index]?.original;
+
+		setOutputText((prevWords) =>
+			prevWords?.map((word, i) => (i === index ? { ...word, isCorrect } : word))
+		);
+	};
+
+	const handleChange = (
+		e: React.ChangeEvent<HTMLInputElement>,
+		index: number
+	) => {
+		const inputValue = e.currentTarget.value;
+
+		setOutputText((prevWords) =>
+			prevWords?.map((word, i) =>
+				i === index ? { ...word, obfuscated: inputValue } : word
+			)
+		);
 	};
 
 	return (
@@ -61,9 +104,21 @@ function Generation() {
 					<div className='output'>
 						<label>Output Text:</label>
 						<div>
-							{outputText.map((element, index) => (
-								<span key={index} className='word'>
-									{element}
+							{outputText.map((word, index) => (
+								<span
+									key={index}
+									className={`word ${word.isCorrect ? 'correct' : 'incorrect'}`}
+								>
+									{word.isCorrect ? (
+										word.original + ' '
+									) : (
+										<input
+											className='obfuscated'
+											value={word.obfuscated}
+											onChange={(e) => handleChange(e, index)}
+											onKeyUp={(e) => handleKeyUp(e, index)}
+										/>
+									)}
 								</span>
 							))}
 						</div>
