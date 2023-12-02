@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import '../App.css';
 import { generateOutput } from '../utils/obfuscation';
+import { useStreak } from '../context/StreakContext';
 
 type TOutputText = {
 	original: string;
@@ -13,6 +14,9 @@ function Generation() {
 	const [outputText, setOutputText] = useState<TOutputText[]>();
 	const [difficulty, setDifficulty] = useState('easy');
 	const [error, setError] = useState('');
+	const [dailyWordsCounter, setDailyWordsCounter] = useState(0);
+
+	const { updateStreak } = useStreak();
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setInputText(event.target.value);
@@ -57,6 +61,19 @@ function Generation() {
 		const inputValue = event.currentTarget.value;
 		const isCorrect = inputValue === outputText?.[index]?.original;
 
+		// TODO: daily words counter should be based on the daily goal that the user chooses
+		// daily streak updates when the user reaches the daily goal
+		if (inputValue === outputText?.[index]?.original) {
+			if (dailyWordsCounter == 4) {
+				updateStreak();
+				setDailyWordsCounter(5);
+			} else if (dailyWordsCounter > 4) {
+				setDailyWordsCounter(5);
+			} else {
+				setDailyWordsCounter((prev) => prev + 1);
+			}
+		}
+
 		setOutputText((prevWords) =>
 			prevWords?.map((word, i) => (i === index ? { ...word, isCorrect } : word))
 		);
@@ -79,6 +96,7 @@ function Generation() {
 		<>
 			<div className='App'>
 				<h1>Generation Effect</h1>
+				{dailyWordsCounter && <h2>{dailyWordsCounter}</h2>}
 				<div className='input'>
 					<label>Input a Sentence or Paragraph:</label>
 					<textarea
