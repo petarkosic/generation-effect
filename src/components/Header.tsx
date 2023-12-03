@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useStreak } from '../context/StreakContext';
+import {
+	CircularProgressbarWithChildren,
+	buildStyles,
+} from 'react-circular-progressbar';
 
 const Header = () => {
 	const { dailyStreak } = useStreak();
@@ -32,18 +36,31 @@ const Header = () => {
 						<option value='serious'>Serious - 30 words</option>
 					</select>
 				</div>
-				Daily streak:
-				<p
-					style={{
-						background: 'green',
-						color: 'white',
-						borderRadius: '5px',
-						padding: '0.5rem 1.5rem',
-						fontWeight: 'bold',
-					}}
-				>
-					{dailyStreak}
-				</p>
+
+				<div style={{ width: '50px' }}>
+					<CircularProgressbarWithChildren
+						value={4}
+						maxValue={10}
+						styles={buildStyles({
+							textColor: '#000',
+							pathColor: '#00ff00',
+							trailColor: '#444',
+							pathTransitionDuration: 0.5,
+							strokeLinecap: 'round',
+						})}
+					>
+						<div>
+							<p
+								style={{
+									marginTop: '-5px',
+									fontWeight: 'bold',
+								}}
+							>
+								{dailyStreak}
+							</p>
+						</div>
+					</CircularProgressbarWithChildren>
+				</div>
 			</div>
 		</div>
 	);
