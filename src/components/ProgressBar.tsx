@@ -25,7 +25,7 @@ const ProgressBar = () => {
 	}
 
 	return (
-		<div style={{ width: '50px' }}>
+		<div className='progress-bar-container'>
 			<CircularProgressbarWithChildren
 				value={dailyWordsCounter}
 				maxValue={numOfWordsForDailyStreak.current}
@@ -38,14 +38,7 @@ const ProgressBar = () => {
 				})}
 			>
 				<div>
-					<p
-						style={{
-							marginTop: '-5px',
-							fontWeight: 'bold',
-						}}
-					>
-						{dailyStreak}
-					</p>
+					<p className='daily-streak'>{dailyStreak}</p>
 				</div>
 			</CircularProgressbarWithChildren>
 		</div>

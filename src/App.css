@@ -16,6 +16,46 @@
 	border-bottom: 1px solid rgba(26, 26, 26, 0.3);
 }
 
+.goal-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	margin-left: auto;
+}
+
+.daily-goal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.daily-goal label {
+	font-weight: bold;
+	text-align: left;
+	width: 100%;
+}
+
+.daily-goal-select {
+	width: 200px;
+	padding: 0.5rem 1rem;
+	background: #eeeeee;
+	color: #1a1a1a;
+	font-weight: bold;
+	border: 1px solid #1a1a1a;
+	border-radius: 8px;
+}
+
+.progress-bar-container {
+	width: 50px;
+}
+
+.daily-streak {
+	margin-top: -5px;
+	font-weight: bold;
+}
+
 .App {
 	display: flex;
 	flex-direction: column;

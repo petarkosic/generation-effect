@@ -7,15 +7,7 @@ const Header = () => {
 		<div className='header'>
 			<Link to='/'>Home</Link>
 			<Link to='/about'>About</Link>
-			<div
-				style={{
-					display: 'flex',
-					alignItems: 'center',
-					justifyContent: 'center',
-					gap: '1rem',
-					marginLeft: 'auto',
-				}}
-			>
+			<div className='goal-container'>
 				<DailyGoal />
 				<ProgressBar />
 			</div>
