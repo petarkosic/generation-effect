@@ -35,6 +35,10 @@ The "generation effect" refers to a psychological phenomenon where actively crea
 
 ### Rules:
 
+**Daily Goal**
+
+- Pick a daily goal.
+
 **Input**:
 
 - Enter a sentence or paragraph.
@@ -50,6 +54,10 @@ The "generation effect" refers to a psychological phenomenon where actively crea
 **Practice**:
 
 - Try to decipher and understand the modified text.
+
+**Guess Words**:
+
+- Attempt to guess the number of words corresponding to your chosen daily goal.
 
 <br />
 
