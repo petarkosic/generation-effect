@@ -4,12 +4,14 @@ type TStreak = {
 	dailyStreak: number;
 	updateStreak: () => void;
 	lastUpdatedTimestamp: number | null;
+	isUpdatedToday: boolean;
 };
 
 const StreakContext = createContext<TStreak>({
 	dailyStreak: 1,
 	updateStreak: () => {},
 	lastUpdatedTimestamp: null,
+	isUpdatedToday: false,
 });
 
 export const useStreak = () => useContext(StreakContext);
@@ -19,6 +21,7 @@ export const StreakProvider = ({ children }: { children: React.ReactNode }) => {
 	const [lastUpdatedTimestamp, setLastUpdatedTimestamp] = useState<
 		number | null
 	>(null);
+	const [isUpdatedToday, setIsUpdatedToday] = useState(false);
 
 	useEffect(() => {
 		const dailyStreakFromLocalStorage = localStorage.getItem('dailyStreak');
@@ -33,7 +36,15 @@ export const StreakProvider = ({ children }: { children: React.ReactNode }) => {
 		if (lastUpdatedTimestampFromLocalStorage) {
 			setLastUpdatedTimestamp(parseInt(lastUpdatedTimestampFromLocalStorage));
 		}
-	}, [dailyStreak]);
+
+		// check if the streak was updated today
+		const currentDate = new Date().toDateString();
+		const lastUpdateDate = lastUpdatedTimestamp
+			? new Date(lastUpdatedTimestamp).toDateString()
+			: null;
+
+		setIsUpdatedToday(currentDate === lastUpdateDate);
+	}, [dailyStreak, lastUpdatedTimestamp]);
 
 	const updateStreak = () => {
 		const currentTimeStamp = new Date().getTime();
@@ -48,14 +59,22 @@ export const StreakProvider = ({ children }: { children: React.ReactNode }) => {
 
 			setDailyStreak((prevStreak) => prevStreak + 1);
 			localStorage.setItem('dailyStreak', String(dailyStreak + 1));
+
+			setIsUpdatedToday(true);
 		} else {
+			setIsUpdatedToday(false);
 			console.log('Streak already updated today');
 		}
 	};
 
 	return (
 		<StreakContext.Provider
-			value={{ dailyStreak, updateStreak, lastUpdatedTimestamp }}
+			value={{
+				dailyStreak,
+				updateStreak,
+				lastUpdatedTimestamp,
+				isUpdatedToday,
+			}}
 		>
 			{children}
 		</StreakContext.Provider>

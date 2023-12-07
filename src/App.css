@@ -49,10 +49,20 @@
 
 .progress-bar-container {
 	width: 50px;
+	position: relative;
 }
 
 .daily-streak {
 	margin-top: -5px;
+	font-weight: bold;
+}
+
+.daily-goal-complete {
+	width: max-content;
+	position: absolute;
+	top: 100%;
+	right: 0%;
+	color: #1a1a1a;
 	font-weight: bold;
 }
 

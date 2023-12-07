@@ -9,7 +9,7 @@ import { useDailyWordsCounter } from '../context/DailyWordsCounterContext';
 import { getWordCountForGoal } from '../utils/getWordCountForGoal';
 
 const ProgressBar = () => {
-	const { dailyStreak } = useStreak();
+	const { dailyStreak, isUpdatedToday } = useStreak();
 	const { dailyGoal } = useDailyGoal();
 
 	const { dailyWordsCounter } = useDailyWordsCounter();
@@ -27,7 +27,11 @@ const ProgressBar = () => {
 	return (
 		<div className='progress-bar-container'>
 			<CircularProgressbarWithChildren
-				value={dailyWordsCounter}
+				value={
+					isUpdatedToday
+						? (numOfWordsForDailyStreak.current as number)
+						: dailyWordsCounter
+				}
 				maxValue={numOfWordsForDailyStreak.current}
 				styles={buildStyles({
 					textColor: '#000',
@@ -41,6 +45,11 @@ const ProgressBar = () => {
 					<p className='daily-streak'>{dailyStreak}</p>
 				</div>
 			</CircularProgressbarWithChildren>
+			{isUpdatedToday && (
+				<p className='daily-goal-complete'>
+					You have completed your daily goal!
+				</p>
+			)}
 		</div>
 	);
 };
