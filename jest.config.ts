@@ -1,12 +1,12 @@
 module.exports = {
 	collectCoverage: true,
-	collectCoverageFrom: ['src/**/*.{js,jsx}'],
+	collectCoverageFrom: ['src/**/*.{ts,tsx}'],
 	coverageDirectory: 'coverage',
 	testEnvironment: 'jsdom',
-	setupFilesAfterEnv: ['./jest.setup.ts'],
+	setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 	transform: {
-		'^.+\\.ts$': 'ts-jest',
+		'^.+\\.tsx?$': 'ts-jest',
 	},
 	testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]s$',
-	moduleFileExtensions: ['ts', 'js', 'json', 'node'],
+	moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 };

@@ -1,4 +1,4 @@
-import { generateOutput } from './obfuscation'; // Replace 'yourModule' with the actual module path
+import { generateOutput } from '../utils/obfuscation';
 
 describe('generateOutput', () => {
 	it('should return the input text when difficulty is easy', () => {

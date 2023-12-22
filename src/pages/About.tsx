@@ -68,6 +68,10 @@ const About = () => {
 					<h2>Rules:</h2>
 					<ol>
 						<li>
+							<h4>Daily Goal:</h4>
+							<p>Pick a daily goal.</p>
+						</li>
+						<li>
 							<h4>Input:</h4>
 							<p>Enter a sentence or paragraph.</p>
 						</li>
@@ -85,6 +89,13 @@ const About = () => {
 						<li>
 							<h4>Practice:</h4>
 							<p>Try to decipher and understand the modified text.</p>
+						</li>
+						<li>
+							<h4>Guess Words:</h4>
+							<p>
+								Attempt to guess the number of words corresponding to your
+								chosen daily goal.
+							</p>
 						</li>
 					</ol>
 				</div>
