@@ -5,7 +5,7 @@ type TDailyGoal = {
 	updateDailyGoal: (newDailyGoal: string) => void;
 };
 
-const DailyGoalContext = createContext<TDailyGoal>({
+export const DailyGoalContext = createContext<TDailyGoal>({
 	dailyGoal: '',
 	updateDailyGoal: () => {},
 });
