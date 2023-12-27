@@ -1,13 +1,12 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import DailyGoal from './../components/DailyGoal';
-import { DailyGoalProvider } from '../context/DailyGoalContext'; // Assuming context file location
+import { DailyGoalProvider } from '../context/DailyGoalContext';
 
 describe('DailyGoal component', () => {
 	test('renders initial daily goal from context', () => {
-		const initialDailyGoal = 'regular';
-
 		render(
-			<DailyGoalProvider dailyGoal={initialDailyGoal}>
+			<DailyGoalProvider>
 				<DailyGoal />
 			</DailyGoalProvider>
 		);
@@ -16,38 +15,25 @@ describe('DailyGoal component', () => {
 		expect(selectedOption).toHaveValue('regular');
 	});
 
-	test('updates daily goal when selection changes', () => {
-		const handleSelectedGoal = vi.fn();
-		render(
-			<DailyGoalProvider
-				dailyGoal='regular'
-				handleSelectedGoal={handleSelectedGoal}
-			>
-				<DailyGoal />
-			</DailyGoalProvider>
-		);
-
-		const newGoal = 'serious';
-		const selectOption = screen.getByRole('combobox');
-		const optionToSelect = screen.getByText('Serious - 30 words');
-		fireEvent.change(selectOption, { target: { value: newGoal } });
+	test('updates daily goal when selection changes', async () => {
 		expect.assertions(2);
-		expect(optionToSelect).toHaveTextContent('Serious - 30 words');
-		expect(screen.getByRole('option', { selected: true })).toHaveValue(newGoal);
-	});
-	test('updates daily goal when a new option is selected', () => {
+
 		render(
 			<DailyGoalProvider>
 				<DailyGoal />
 			</DailyGoalProvider>
 		);
 
-		const select = screen.getByRole('combobox') as HTMLSelectElement;
+		const initialGoal = 'casual';
+		expect(screen.getByRole('option', { selected: true })).toHaveValue(
+			initialGoal
+		);
 
-		fireEvent.change(screen.getByRole('combobox'), {
-			target: { value: 'serious' },
-		});
+		const newGoal = 'serious';
+		const selectOption = screen.getByRole('combobox') as HTMLSelectElement;
 
-		expect(select.value).toBe('serious');
+		await userEvent.selectOptions(selectOption, newGoal);
+
+		expect(screen.getByRole('option', { selected: true })).toHaveValue(newGoal);
 	});
 });
