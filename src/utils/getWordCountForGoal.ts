@@ -1,12 +1,9 @@
 export const getWordCountForGoal = (goal: string): number => {
-	switch (goal) {
-		case 'casual':
-			return 10;
-		case 'regular':
-			return 20;
-		case 'serious':
-			return 30;
-		default:
-			return 0;
-	}
+	const wordCounts: Record<string, number> = {
+		casual: 10,
+		regular: 20,
+		serious: 30,
+	};
+
+	return wordCounts[goal] ?? 0;
 };

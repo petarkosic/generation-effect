@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDailyGoal } from '../context/DailyGoalContext';
 import { useStreak } from '../context/StreakContext';
 import {
@@ -14,15 +14,11 @@ const ProgressBar = () => {
 
 	const { dailyWordsCounter } = useDailyWordsCounter();
 
-	const numOfWordsForDailyStreak = useRef<number>();
+	const numOfWordsForDailyStreak = useRef<number | null>();
 
-	if (dailyGoal == 'casual') {
-		numOfWordsForDailyStreak.current = getWordCountForGoal('casual');
-	} else if (dailyGoal == 'regular') {
-		numOfWordsForDailyStreak.current = getWordCountForGoal('regular');
-	} else if (dailyGoal == 'serious') {
-		numOfWordsForDailyStreak.current = getWordCountForGoal('serious');
-	}
+	useEffect(() => {
+		numOfWordsForDailyStreak.current = getWordCountForGoal(dailyGoal);
+	}, [dailyGoal]);
 
 	return (
 		<div className='progress-bar-container'>
@@ -32,7 +28,7 @@ const ProgressBar = () => {
 						? (numOfWordsForDailyStreak.current as number)
 						: dailyWordsCounter
 				}
-				maxValue={numOfWordsForDailyStreak.current}
+				maxValue={numOfWordsForDailyStreak.current as number}
 				styles={buildStyles({
 					textColor: '#000',
 					pathColor: '#00ff00',
