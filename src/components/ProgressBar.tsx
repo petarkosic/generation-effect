@@ -21,7 +21,7 @@ const ProgressBar = () => {
 	}, [dailyGoal]);
 
 	return (
-		<div className='progress-bar-container'>
+		<div className='progress-bar-container' data-testid='progress-bar'>
 			<CircularProgressbarWithChildren
 				value={
 					isUpdatedToday
