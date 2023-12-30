@@ -103,6 +103,7 @@ function Generation() {
 						cols={30}
 						value={inputText}
 						onChange={handleInputChange}
+						data-testid='input-text'
 					/>
 				</div>
 				<div className='difficulty'>
