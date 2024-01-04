@@ -13,10 +13,10 @@ type TOutputText = {
 };
 
 function Generation() {
-	const [inputText, setInputText] = useState('');
+	const [inputText, setInputText] = useState<string>('');
 	const [outputText, setOutputText] = useState<TOutputText[]>();
-	const [difficulty, setDifficulty] = useState('easy');
-	const [error, setError] = useState('');
+	const [difficulty, setDifficulty] = useState<string>('easy');
+	const [error, setError] = useState<string>('');
 
 	const { updateStreak } = useStreak();
 	const { dailyGoal } = useDailyGoal();
@@ -36,10 +36,10 @@ function Generation() {
 			}, 3000);
 		}
 
-		const originalInputText = inputText.split(' ');
-		const generatedOutput = generateOutput(inputText, difficulty);
+		const originalInputText: string[] = inputText.split(' ');
+		const generatedOutput: string = generateOutput(inputText, difficulty);
 
-		const words = generatedOutput.split(' ').map((word, idx) => {
+		const words: TOutputText[] = generatedOutput.split(' ').map((word, idx) => {
 			if (word.includes('_')) {
 				return {
 					original: originalInputText[idx],
@@ -62,16 +62,16 @@ function Generation() {
 		event: React.KeyboardEvent<HTMLInputElement>,
 		index: number
 	) => {
-		const inputValue = event.currentTarget.value;
-		const isCorrect = inputValue === outputText?.[index]?.original;
+		const inputValue: string = event.currentTarget.value;
+		const isCorrect: boolean = inputValue === outputText?.[index]?.original;
+		const isInputEqualToOriginal: boolean =
+			inputValue === outputText?.[index]?.original;
 
-		if (inputValue === outputText?.[index]?.original) {
+		if (isInputEqualToOriginal) {
 			if (dailyWordsCounter + 1 >= getWordCountForGoal(dailyGoal)) {
 				updateStreak();
-				updateDailyWordsCounter(dailyWordsCounter + 1);
-			} else {
-				updateDailyWordsCounter(dailyWordsCounter + 1);
 			}
+			updateDailyWordsCounter(dailyWordsCounter + 1);
 		}
 
 		setOutputText((prevWords) =>
@@ -83,7 +83,7 @@ function Generation() {
 		e: React.ChangeEvent<HTMLInputElement>,
 		index: number
 	) => {
-		const inputValue = e.currentTarget.value;
+		const inputValue: string = e.currentTarget.value;
 
 		setOutputText((prevWords) =>
 			prevWords?.map((word, i) =>

@@ -21,7 +21,8 @@ vi.mock('../context/DailyWordsCounterContext', () => ({
 }));
 
 vi.mock('../utils/getWordCountForGoal', () => ({
-	getWordCountForGoal: vi.fn((goal: number) => goal * 2),
+	// return 10 for casual goal
+	getWordCountForGoal: vi.fn(() => 10),
 }));
 
 describe('Generation', () => {
@@ -96,7 +97,6 @@ describe('Generation', () => {
 			await waitFor(() => {
 				expect(screen.getByText('Output Text:')).toBeInTheDocument();
 			});
-			console.log(generateOutput(testSentence, difficulty));
 
 			expect(generateOutput(testSentence, difficulty)).toBe(
 				mockReturnValues[difficulty]
