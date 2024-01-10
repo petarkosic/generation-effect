@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
+import App from './App';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
-import { StreakProvider } from './context/StreakContext.tsx';
-import { DailyGoalProvider } from './context/DailyGoalContext.tsx';
-import { DailyWordsCounterProvider } from './context/DailyWordsCounterContext.tsx';
+import { StreakProvider } from './context/StreakContext';
+import { DailyGoalProvider } from './context/DailyGoalContext';
+import { DailyWordsCounterProvider } from './context/DailyWordsCounterContext';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
