@@ -53,6 +53,18 @@ describe('Generation', () => {
 		});
 	});
 
+	test('handles difficulty level change', async () => {
+		render(<Generation />);
+
+		const difficultySelect = screen.getByLabelText(
+			'Difficulty Level:'
+		) as HTMLSelectElement;
+
+		await userEvent.selectOptions(difficultySelect, 'hard');
+
+		expect(difficultySelect.value).toBe('hard');
+	});
+
 	test('generate button renders output text', async () => {
 		vi.mocked(generateOutput).mockReturnValue('This is a t_st sentence.');
 
