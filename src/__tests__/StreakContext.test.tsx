@@ -17,7 +17,7 @@ vi.mock('../context/DailyGoalContext', () => ({
 
 vi.mock('../context/StreakContext', () => ({
 	useStreak: vi.fn(() => ({
-		dailyStreak: 10,
+		dailyStreak: 15,
 		isUpdatedToday: false,
 		updateStreak: vi.fn(),
 		lastUpdatedTimestamp: null,
@@ -68,7 +68,7 @@ describe('StreakProvider', () => {
 
 	test('updates streak', async () => {
 		vi.mocked(useStreak).mockReturnValue({
-			dailyStreak: 11,
+			dailyStreak: 16,
 			isUpdatedToday: true,
 			lastUpdatedTimestamp: 0,
 			updateStreak: vi.fn(),
@@ -80,7 +80,7 @@ describe('StreakProvider', () => {
 
 		await waitFor(() => {
 			expect(result.current.updateStreak).toBeCalledTimes(1);
-			expect(result.current.dailyStreak).toBe(11);
+			expect(result.current.dailyStreak).toBe(16);
 			expect(result.current.isUpdatedToday).toBe(true);
 		});
 	});

@@ -11,7 +11,7 @@ describe('DailyGoal component', () => {
 			</DailyGoalProvider>
 		);
 
-		const selectedOption = screen.getByText('Regular - 20 words');
+		const selectedOption = screen.getByText('Regular - 30 words');
 		expect(selectedOption).toHaveValue('regular');
 	});
 

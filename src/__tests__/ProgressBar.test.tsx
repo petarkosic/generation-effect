@@ -7,7 +7,7 @@ vi.mock('../context/DailyGoalContext', () => ({
 }));
 
 vi.mock('../context/StreakContext', () => ({
-	useStreak: vi.fn(() => ({ dailyStreak: 10, isUpdatedToday: false })),
+	useStreak: vi.fn(() => ({ dailyStreak: 15, isUpdatedToday: false })),
 }));
 
 vi.mock('../context/DailyWordsCounterContext', () => ({
@@ -29,7 +29,7 @@ describe('ProgressBar', () => {
 			'.CircularProgressbar-path'
 		) as Element;
 
-		const streakText = screen.getByText('10');
+		const streakText = screen.getByText('15');
 
 		await new Promise((resolve) => setTimeout(resolve, 500));
 		const computedStyle = window.getComputedStyle(progress);
@@ -49,7 +49,7 @@ describe('ProgressBar', () => {
 
 		// Mock context values to simulate a full progress bar scenario
 		vi.mocked(useStreak).mockReturnValue({
-			dailyStreak: 10,
+			dailyStreak: 15,
 			isUpdatedToday: true,
 			lastUpdatedTimestamp: 0,
 			updateStreak: vi.fn(),
@@ -62,7 +62,7 @@ describe('ProgressBar', () => {
 			'.CircularProgressbar-path'
 		) as Element;
 
-		const streakText = screen.getByText('10');
+		const streakText = screen.getByText('15');
 
 		expect(progressBar).toBeInTheDocument();
 		expect(progress).toBeInTheDocument();
