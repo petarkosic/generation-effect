@@ -7,6 +7,7 @@ const Header = () => {
 		<div className='header'>
 			<Link to='/'>Home</Link>
 			<Link to='/about'>About</Link>
+			<Link to='/dashboard'>Dashboard</Link>
 			<div className='goal-container'>
 				<DailyGoal />
 				<ProgressBar />

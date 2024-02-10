@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import './App.css';
 import Home from './pages/Home';
 import About from './pages/About';
+import Dashboard from './pages/Dashboard';
 
 function App() {
 	return (
@@ -10,6 +11,7 @@ function App() {
 			<Routes>
 				<Route path='/' element={<Home />} />
 				<Route path='/about' element={<About />} />
+				<Route path='/dashboard' element={<Dashboard />} />
 			</Routes>
 		</Suspense>
 	);
