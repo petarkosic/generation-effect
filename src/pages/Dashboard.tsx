@@ -1,19 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
 import { Line } from 'react-chartjs-2';
+import { ChartData } from 'chart.js';
 import 'chart.js/auto';
 import { useStreak } from '../context/StreakContext';
 import { useDailyGoal } from '../context/DailyGoalContext';
 import { getWordCountForGoal } from '../utils/getWordCountForGoal';
 import Header from '../components/Header';
 
+type ChartDataType = ChartData<'line', number[], string>;
+
 const Dashboard = () => {
-	const [chartData, setChartData] = useState({
+	const [chartData, setChartData] = useState<ChartDataType>({
 		labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
 		datasets: [
 			{
 				label: 'Daily Goal',
 				fill: true,
-				lineTension: 0.2,
+				cubicInterpolationMode: 'monotone',
 				backgroundColor: 'rgba(0, 0, 0, 0.05)',
 				borderColor: 'black',
 				borderCapStyle: 'butt',
@@ -25,7 +28,6 @@ const Dashboard = () => {
 				pointHoverBackgroundColor: 'black',
 				pointHoverBorderColor: 'black',
 				pointHoverBorderWidth: 2,
-				pointStyle: false,
 				pointRadius: 1,
 				pointHitRadius: 100,
 				data: [0, 0, 0, 0, 0, 0, 0],
