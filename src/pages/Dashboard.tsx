@@ -9,9 +9,19 @@ import Header from '../components/Header';
 
 type ChartDataType = ChartData<'line', number[], string>;
 
+const getUpdatedLabels = (): string[] => {
+	const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+	const todayIndex = new Date().getDay();
+	const updatedLabels = [
+		...daysOfWeek.slice(todayIndex),
+		...daysOfWeek.slice(0, todayIndex),
+	];
+	return updatedLabels;
+};
+
 const Dashboard = () => {
 	const [chartData, setChartData] = useState<ChartDataType>({
-		labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+		labels: getUpdatedLabels(),
 		datasets: [
 			{
 				label: 'Daily Goal',
